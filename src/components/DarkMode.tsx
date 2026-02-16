@@ -1,20 +1,13 @@
 'use client';
-
-import { useEffect } from 'react';
+import { Button } from '@/components/ui/button';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
-import { Button } from '@/components/ui/button';
 
 export function DarkMode() {
-  const { theme, setTheme } = useTheme();
-
-  useEffect(() => {}, []);
+  const { setTheme, resolvedTheme } = useTheme();
 
   const toggleTheme = () => {
-    if (!document.startViewTransition) {
-      setTheme(theme === 'dark' ? 'light' : 'dark');
-      return;
-    }
+    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
   };
 
   return (
