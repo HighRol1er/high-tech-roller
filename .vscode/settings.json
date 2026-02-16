@@ -1,0 +1,13 @@
+{
+  // 1. ESLint Flat Config 활성화
+  "eslint.useFlatConfig": true,
+
+  // 2. 기본 포매터 설정 (Prettier 담당)
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+
+  // 3. 저장 시 ESLint 자동 수정 실행 (타입 변환, 정렬 담당)
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  }
+}
