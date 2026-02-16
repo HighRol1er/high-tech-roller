@@ -1,3 +1,14 @@
+'use client';
+
+import AsciiArt from '@/components/console/AsciiArt';
+import { DarkMode } from '@/components/DarkMode';
+
 export default function Home() {
-  return <main>gh</main>;
+  AsciiArt();
+
+  return (
+    <main>
+      <DarkMode />
+    </main>
+  );
 }
