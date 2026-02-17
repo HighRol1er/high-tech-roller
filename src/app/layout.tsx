@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import '../shared/styles/globals.css';
 import { AppSidebar } from '@/components/layouts';
 import { Header } from '@/components/layouts/Header';
-import { SidebarProvider } from '@/components/ui/sidebar';
+import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
 import { ThemeProvider } from '@/providers';
 
 // const geistSans = Geist({
@@ -32,10 +32,10 @@ export default function RootLayout({
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
           <SidebarProvider>
             <AppSidebar />
-            <div className='flex flex-col flex-1 min-w-0'>
+            <SidebarInset>
               <Header />
-              {children}
-            </div>
+              <main>{children}</main>
+            </SidebarInset>
           </SidebarProvider>
         </ThemeProvider>
       </body>
