@@ -38,15 +38,12 @@ const MOCK_POSTS = [
 export const PostCard = ({ post, index }: { post: (typeof MOCK_POSTS)[number]; index: number }) => {
   return (
     <Card className='w-full p-0 gap-0 group cursor-pointer h-75 sm:h-auto'>
-      {/* 썸네일 */}
-
       <div className='relative w-full aspect-video overflow-hidden rounded-t-md bg-muted'>
         {post.thumbnail ? (
           <Image
             fill
             src={post.thumbnail}
             alt={post.title}
-            // 이게 뭐지
             sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
             className='w-full h-full object-cover transition-transform duration-300 group-hover:scale-105'
           />
