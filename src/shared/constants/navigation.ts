@@ -1,4 +1,4 @@
-import { CircleUser, File, House } from 'lucide-react';
+import { Pencil, House } from 'lucide-react';
 
 export const NAV = [
   {
@@ -7,8 +7,8 @@ export const NAV = [
     icon: House,
   },
   {
-    title: 'Posts',
-    url: '/posts',
-    icon: File,
+    title: 'Write(Dev Only)',
+    url: '/write',
+    icon: Pencil,
   },
 ];
