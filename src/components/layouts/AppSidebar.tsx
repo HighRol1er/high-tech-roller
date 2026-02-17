@@ -1,15 +1,12 @@
 import Link from 'next/link';
-// import { Logo } from '@/components/common';
-// import { Tags } from '@/components/posts';
 import { DarkMode } from '../DarkMode';
-import Logo from '@/components/common/Logo';
+import { Logo } from '@/components/common/Logo';
 import { Separator } from '@/components/ui/separator';
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -20,11 +17,9 @@ import { NAV } from '@/shared/constants';
 export function AppSidebar() {
   return (
     <Sidebar collapsible='icon'>
-      <SidebarHeader>
-        <div className='flex items-center gap-2 px-2 py-1.5'>
-          <div className='flex flex-col group-data-[collapsible=icon]:hidden'>
-            <Logo />
-          </div>
+      <SidebarHeader className='h-16'>
+        <div>
+          <Logo />
         </div>
       </SidebarHeader>
       <SidebarContent>
@@ -43,30 +38,6 @@ export function AppSidebar() {
               ))}
               <DarkMode />
               <Separator />
-
-              {/* {location.pathname.includes('/posts') && (
-                <div className='group-data-[collapsible=icon]:hidden'>
-                  <SidebarGroupLabel className='font-figtree'>Post Tags</SidebarGroupLabel>
-                  <Link to='/posts'>
-                    <SidebarMenuButton tooltip='All Posts'>
-                      <Tags className='dark:bg-green-950 dark:text-green-300'>All ({posts.length})</Tags>
-                    </SidebarMenuButton>
-                  </Link>
-                  {Array.from(tags)
-                    .sort()
-                    .map((tag) => (
-                      <SidebarMenuItem key={tag}>
-                        <SidebarMenuButton tooltip={tag}>
-                          <Link to={`/posts?tag=${tag}`}>
-                            <Tags>
-                              {tag} ({getTagCount(tag)})
-                            </Tags>
-                          </Link>
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
-                    ))}
-                </div>
-              )} */}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

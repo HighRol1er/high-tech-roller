@@ -1,9 +1,5 @@
-import { DarkMode } from '@/components/DarkMode';
+import { Header } from '@/components/layouts/Header';
 
 export default function Main() {
-  return (
-    <main>
-      <DarkMode />
-    </main>
-  );
+  return <div>main</div>;
 }

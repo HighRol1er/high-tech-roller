@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 // import { Geist, Geist_Mono } from 'next/font/google';
 import '../shared/styles/globals.css';
 import { AppSidebar } from '@/components/layouts';
-import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
+import { Header } from '@/components/layouts/Header';
+import { SidebarProvider } from '@/components/ui/sidebar';
 import { ThemeProvider } from '@/providers';
 
 // const geistSans = Geist({
@@ -30,16 +31,11 @@ export default function RootLayout({
       <body className={`antialiased`}>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
           <SidebarProvider>
-            {/* 1. 사이드바 본체 */}
             <AppSidebar />
-
-            {/* 2. 콘텐츠 영역을 감싸는 Inset (사이드바와 나란히 배치됨) */}
-            <main>
-              <div>
-                <SidebarTrigger />
-              </div>
-              <div>{children}</div>
-            </main>
+            <div className='flex flex-col flex-1 min-w-0'>
+              <Header />
+              {children}
+            </div>
           </SidebarProvider>
         </ThemeProvider>
       </body>
