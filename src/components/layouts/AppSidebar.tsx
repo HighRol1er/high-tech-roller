@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import { DarkMode } from '../DarkMode';
-import { Logo } from '@/components/common/Logo';
+import { Logo, DarkMode } from '@/components/common';
 import { Separator } from '@/components/ui/separator';
 import {
   Sidebar,
