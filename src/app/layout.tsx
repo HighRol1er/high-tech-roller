@@ -4,6 +4,7 @@ import '../shared/styles/globals.css';
 import { AppSidebar } from '@/components/layouts';
 import { Header } from '@/components/layouts/Header';
 import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
+import { Toaster } from '@/components/ui/sonner';
 import { ThemeProvider } from '@/providers';
 
 // const geistSans = Geist({
@@ -35,6 +36,7 @@ export default function RootLayout({
             <SidebarInset>
               <Header />
               <main>{children}</main>
+              <Toaster />
             </SidebarInset>
           </SidebarProvider>
         </ThemeProvider>
