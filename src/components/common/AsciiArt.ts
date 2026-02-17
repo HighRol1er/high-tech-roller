@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 
-export default function AsciiArt() {
+export function AsciiArt() {
   useEffect(() => {
     const lines = [
       ' ██╗  ██╗██╗ ██████╗ ██╗  ██╗████████╗███████╗ ██████╗██╗  ██╗',
