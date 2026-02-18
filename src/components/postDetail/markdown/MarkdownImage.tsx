@@ -8,12 +8,12 @@ interface MarkdownImgProps extends ComponentPropsWithoutRef<'img'> {
 export const MarkdownImage = ({ src, alt, className, node, ...props }: MarkdownImgProps) => {
   if (!src) return null;
 
-  // alt 텍스트에서 이름과 높이 값을 분리합니다. (예: "스크린샷|300")
+  // alt 텍스트에서 이름, 높이 분리합니다. (예: "스크린샷|300")
   const [altText, height] = (alt || '').split('|');
 
   const customStyle = {
     height: height ? `${height}px` : 'auto',
-    width: 'auto', // 가로비율은 자동 유지
+    width: 'auto',
     maxWidth: '100%',
   };
 
