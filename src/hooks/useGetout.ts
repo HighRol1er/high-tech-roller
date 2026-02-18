@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation'; // redirect 대신 useRouter
 import { toast } from 'sonner';
 
-export default function useGetout() {
+export function useGetout() {
   const router = useRouter();
 
   useEffect(() => {

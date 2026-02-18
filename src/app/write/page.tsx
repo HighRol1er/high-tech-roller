@@ -1,12 +1,11 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useRef, useState } from 'react';
 import { ComponentConfig } from '@/components/postDetail/markdown';
 import { Button } from '@/components/ui/button';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable';
 import { WriteTag, WriteTitle } from '@/components/write';
-import useGetout from '@/hooks/useGetout';
-import { useMarkdownEditor } from '@/hooks/useMarkdownEditor';
+import { useGetout, useMarkdownEditor, useTagEditor } from '@/hooks';
 import 'katex/dist/katex.min.css';
 import ReactMarkdown from 'react-markdown';
 import rehypeKatex from 'rehype-katex';
@@ -16,40 +15,24 @@ import remarkMath from 'remark-math';
 
 export default function WritePage() {
   const [title, setTitle] = useState<string>('');
-  const [tagInput, setTagInput] = useState('');
-  const [tags, setTags] = useState<string[]>([]);
   const [markdown, setMarkdown] = useState<string>('');
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  // const dragPositionRef = useRef<number>(0);
 
   useGetout();
   const editor = useMarkdownEditor(textareaRef, setMarkdown);
-
-  const handleTagKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && tagInput.trim() !== '') {
-      e.preventDefault();
-      if (!tags.includes(tagInput.trim())) {
-        setTags([...tags, tagInput.trim()]);
-      }
-      setTagInput('');
-    }
-  };
-
-  const removeTag = (index: number) => {
-    setTags(tags.filter((_, i) => i !== index));
-  };
+  const tagEditor = useTagEditor();
 
   return (
     <div className='h-screen w-full overflow-hidden flex flex-col'>
       <div className='relative p-6 space-y-4 border-b bg-card'>
         <WriteTitle title={title} setTitle={setTitle} />
         <WriteTag
-          tagInput={tagInput}
-          setTagInput={setTagInput}
-          tags={tags}
-          handleTagKeyDown={handleTagKeyDown}
-          removeTag={removeTag}
+          tagInput={tagEditor.tagInput}
+          setTagInput={tagEditor.setTagInput}
+          tags={tagEditor.tags}
+          handleTagKeyDown={tagEditor.handleTagKeyDown}
+          removeTag={tagEditor.removeTag}
         />
         <Button className='absolute top-4 right-4'>POST</Button>
       </div>
