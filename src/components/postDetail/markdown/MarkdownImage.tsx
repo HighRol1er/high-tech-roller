@@ -25,7 +25,7 @@ export const MarkdownImage = ({ src, alt, className, node, ...props }: MarkdownI
         src={src}
         alt={altText}
         style={customStyle}
-        className='rounded-lg border border-border shadow-sm object-contain'
+        className='rounded-lg object-contain'
         loading='lazy'
       />
     </div>
