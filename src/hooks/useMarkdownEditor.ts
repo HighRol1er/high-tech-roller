@@ -1,41 +1,37 @@
 import { useCallback, useRef } from 'react';
+import { uploadPostImage } from '@/lib/supabase/uploadimage';
+import { toast } from 'sonner';
 
 export const useMarkdownEditor = (
-  // 1. 외부에서 정의한 ref를 인자로 받습니다.
   textareaRef: React.RefObject<HTMLTextAreaElement | null>,
   setMarkdown: React.Dispatch<React.SetStateAction<string>>,
 ) => {
   const dragPositionRef = useRef<number>(0);
 
-  // 1. Enter 키 핸들러 (개행 시 \ 자동 삽입)
-  const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-      if (e.key !== 'Enter' || e.shiftKey) return;
+  // 개행용 event => \n 삽입
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key !== 'Enter' || e.shiftKey) return;
 
-      e.preventDefault();
-      // 인자로 받은 ref의 current를 참조합니다.
-      const textarea = textareaRef.current;
-      if (!textarea) return;
+    e.preventDefault();
+    const textarea = textareaRef.current;
+    if (!textarea) return;
 
-      const start = textarea.selectionStart;
-      const end = textarea.selectionEnd;
-      const value = textarea.value;
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const value = textarea.value;
 
-      const lineStart = value.lastIndexOf('\n', start - 1) + 1;
-      const currentLine = value.slice(lineStart, start);
-      const insert = currentLine.trim() === '' || currentLine.endsWith('\\') ? '\n' : '\\\n';
+    const lineStart = value.lastIndexOf('\n', start - 1) + 1;
+    const currentLine = value.slice(lineStart, start);
+    const insert = currentLine.trim() === '' || currentLine.endsWith('\\') ? '\n' : '\\\n';
 
-      setMarkdown(value.slice(0, start) + insert + value.slice(end));
+    setMarkdown(value.slice(0, start) + insert + value.slice(end));
 
-      requestAnimationFrame(() => {
-        const newPos = start + insert.length;
-        textarea.setSelectionRange(newPos, newPos);
-      });
-    },
-    [setMarkdown, textareaRef],
-  );
+    requestAnimationFrame(() => {
+      const newPos = start + insert.length;
+      textarea.setSelectionRange(newPos, newPos);
+    });
+  };
 
-  // 2. Drag Leave 핸들러
   const handleDragLeave = useCallback((e: React.DragEvent<HTMLTextAreaElement>) => {
     if (e.currentTarget.contains(e.relatedTarget as Node)) return;
   }, []);
@@ -65,9 +61,9 @@ export const useMarkdownEditor = (
     [textareaRef],
   );
 
-  // 4. Drop 핸들러 (이미지 마크다운 삽입)
+  // 4. Drop 핸들러, supabase uploadimage
   const handleDrop = useCallback(
-    (e: React.DragEvent<HTMLTextAreaElement>) => {
+    async (e: React.DragEvent<HTMLTextAreaElement>) => {
       e.preventDefault();
       e.stopPropagation();
 
@@ -76,24 +72,44 @@ export const useMarkdownEditor = (
 
       const textarea = textareaRef.current;
       if (!textarea) return;
-      const position = dragPositionRef.current;
 
-      let insertText = '';
-      files.forEach((file) => {
-        const objectUrl = URL.createObjectURL(file);
-        const filename = file.name.replace(/\.[^.]+$/, '');
-        insertText += `\n![${filename}|300](${objectUrl})\n`;
-      });
+      // 드롭된 순간의 위치를 고정합니다.
+      const basePosition = dragPositionRef.current;
+      let currentOffset = 0;
 
-      setMarkdown((prev) => prev.slice(0, position) + insertText + prev.slice(position));
+      // 여러 파일을 순차적으로 업로드합니다.
+      for (const file of files) {
+        try {
+          // 1. Supabase 업로드 실행
+          const publicUrl = await uploadPostImage(file);
 
+          // 2. 마크다운 문구 생성
+          const filename = file.name.replace(/\.[^.]+$/, '');
+          const insertText = `\n![${filename}|300](${publicUrl})\n`;
+
+          // 3. 텍스트 삽입 (함수형 업데이트로 순차 처리 보장)
+          setMarkdown((prev) => {
+            const before = prev.slice(0, basePosition + currentOffset);
+            const after = prev.slice(basePosition + currentOffset);
+            return before + insertText + after;
+          });
+
+          // 다음 이미지가 들어갈 위치를 계산합니다.
+          currentOffset += insertText.length;
+        } catch (error) {
+          console.error('Image upload failed:', error);
+          toast(`${file.name} 업로드에 실패했습니다.`);
+        }
+      }
+
+      // 4. 최종 삽입 후 커서 위치 조정
       setTimeout(() => {
         if (textarea) {
-          const newPos = position + insertText.length;
-          textarea.setSelectionRange(newPos, newPos);
+          const finalPos = basePosition + currentOffset;
+          textarea.setSelectionRange(finalPos, finalPos);
           textarea.focus();
         }
-      }, 0);
+      }, 50);
     },
     [setMarkdown, textareaRef],
   );
