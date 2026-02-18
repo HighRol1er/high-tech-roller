@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { ComponentConfig } from '@/components/postDetail/markdown';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable';
 import useGetout from '@/hooks/useGetout';
 import 'katex/dist/katex.min.css';
@@ -64,6 +65,7 @@ export default function WritePage() {
             onKeyDown={handleTagKeyDown}
           />
         </div>
+        <Button className='absolute top-4 right-4'>POST</Button>
       </div>
 
       <ResizablePanelGroup orientation='horizontal' className='flex-1'>
@@ -71,7 +73,7 @@ export default function WritePage() {
         <ResizablePanel defaultSize={50} minSize={20}>
           <div className='h-full w-full bg-card'>
             <textarea
-              className='w-full h-full p-6 resize-none focus:outline-none font-mono text-base leading-normal text-sm'
+              className='w-full h-full p-6 resize-none focus:outline-none font-mono leading-normal text-sm'
               value={markdown}
               onChange={(e) => setMarkdown(e.target.value)}
               placeholder='마크다운으로 내용을 작성하세요...'
