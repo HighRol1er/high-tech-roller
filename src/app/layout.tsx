@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-// import { Geist, Geist_Mono } from 'next/font/google';
+import { domine } from './fonts';
 import '../shared/styles/globals.css';
 import { AppSidebar } from '@/components/layouts';
 import { Header } from '@/components/layouts/Header';
@@ -28,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en' suppressHydrationWarning>
+    <html lang='en' className={domine.variable} suppressHydrationWarning>
       <body className={`antialiased`}>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
           <SidebarProvider>

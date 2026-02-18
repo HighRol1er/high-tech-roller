@@ -45,6 +45,19 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+  --font-domine: var(--font-domine);
+}
+
+@utility font-eva-title {
+  font-family: var(--font-domine), serif;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+  font-weight: 700;
+  text-transform: uppercase;
+
+  display: inline-block;
+  transform: scaleX(0.85);
+  transform-origin: left;
 }
 
 :root {
