@@ -128,7 +128,7 @@ export default function WritePage() {
         {/* 오른쪽: 실시간 미리보기 영역 */}
         <ResizablePanel defaultSize={50} minSize={20}>
           <div className='h-full p-8 overflow-y-auto bg-white dark:bg-zinc-950'>
-            <div className='max-w-none dark:prose-invert'>
+            <div className='max-w-none'>
               <ReactMarkdown
                 remarkPlugins={[remarkGfm, remarkMath]}
                 rehypePlugins={[rehypeRaw, rehypeKatex]}
