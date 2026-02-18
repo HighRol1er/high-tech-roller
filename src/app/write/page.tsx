@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { ComponentConfig } from '@/components/postDetail/markdown';
 import { Badge } from '@/components/ui/badge';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable';
 import useGetout from '@/hooks/useGetout';
@@ -12,13 +13,11 @@ import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 
-// KaTeX 스타일 임포트 (수식 깨짐 방지)
-
 export default function WritePage() {
   const [title, setTitle] = useState<string>('');
   const [tagInput, setTagInput] = useState('');
   const [tags, setTags] = useState<string[]>([]);
-  const [markdown, setMarkdown] = useState<string>('# Hello, Markdown!\n\n```js\nconsole.log("Hello World");\n```');
+  const [markdown, setMarkdown] = useState<string>('');
 
   useGetout();
 
@@ -72,7 +71,7 @@ export default function WritePage() {
         <ResizablePanel defaultSize={50} minSize={20}>
           <div className='h-full w-full bg-card'>
             <textarea
-              className='w-full h-full p-6 resize-none focus:outline-none font-mono text-base'
+              className='w-full h-full p-6 resize-none focus:outline-none font-mono text-base leading-normal text-sm'
               value={markdown}
               onChange={(e) => setMarkdown(e.target.value)}
               placeholder='마크다운으로 내용을 작성하세요...'
@@ -87,7 +86,11 @@ export default function WritePage() {
         <ResizablePanel defaultSize={50} minSize={20}>
           <div className='h-full p-8 overflow-y-auto bg-white dark:bg-zinc-950'>
             <div className='prose prose-slate max-w-none dark:prose-invert'>
-              <ReactMarkdown remarkPlugins={[remarkGfm, remarkMath]} rehypePlugins={[rehypeRaw, rehypeKatex]}>
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm, remarkMath]}
+                rehypePlugins={[rehypeRaw, rehypeKatex]}
+                components={ComponentConfig}
+              >
                 {markdown}
               </ReactMarkdown>
             </div>
