@@ -3,8 +3,19 @@ import { PostDetail } from '@/components/postDetail';
 import { db } from '@/db';
 import { posts } from '@/db/schema/post';
 import { eq } from 'drizzle-orm';
-import 'katex/dist/katex.min.css';
 
+const getPost = async (decodedSlug: string) => {
+  try {
+    const res = await db.query.posts.findFirst({
+      where: eq(posts.slug, decodedSlug),
+    });
+    return res;
+  } catch (error) {
+    console.error('Database Fetch Error:', error);
+
+    throw new Error('데이터베이스에서 포스트를 가져오는 데 실패했습니다.');
+  }
+};
 interface Slug {
   params: Promise<{ slug: string }>;
 }
@@ -13,16 +24,11 @@ export default async function Page({ params }: Slug) {
   const { slug } = await params;
   const decodedSlug = decodeURIComponent(slug);
 
-  // 데이터 페칭
-  const post = await db.query.posts.findFirst({
-    where: eq(posts.slug, decodedSlug),
-  });
+  const post = await getPost(decodedSlug);
 
-  // 데이터가 없으면 즉시 404 처리
   if (!post) {
     notFound();
   }
 
-  // 렌더링 컴포넌트로 데이터 전달
   return <PostDetail post={post} />;
 }
