@@ -1,4 +1,4 @@
-import { Pencil, House } from 'lucide-react';
+import { Apple, Pencil, House } from 'lucide-react';
 
 export const NAV = [
   {
@@ -10,5 +10,10 @@ export const NAV = [
     title: 'Write(Dev Only)',
     url: '/write',
     icon: Pencil,
+  },
+  {
+    title: '사과게임',
+    url: 'https://www.gamesaien.com/game/fruit_box_a/',
+    icon: Apple,
   },
 ];
