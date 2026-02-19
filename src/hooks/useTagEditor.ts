@@ -29,6 +29,6 @@ export const useTagEditor = () => {
     setTagInput,
     handleTagKeyDown,
     removeTag,
-    setTags, // 초기값 세팅 등이 필요할 경우 대비
+    setTags,
   };
 };
