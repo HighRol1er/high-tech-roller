@@ -1,11 +1,14 @@
 'use client';
 
 import { useRef, useState } from 'react';
+import { ErrToast, SuccessToast } from '@/components/common';
 import { ComponentConfig } from '@/components/postDetail/markdown';
 import { Button } from '@/components/ui/button';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable';
 import { WriteTag, WriteTitle } from '@/components/write';
 import { useGetout, useMarkdownEditor, useTagEditor } from '@/hooks';
+import { slugify } from '@/lib';
+import { postSchema } from '@/types';
 import 'katex/dist/katex.min.css';
 import ReactMarkdown from 'react-markdown';
 import rehypeKatex from 'rehype-katex';
@@ -23,6 +26,38 @@ export default function WritePage() {
   const editor = useMarkdownEditor(textareaRef, setMarkdown);
   const tagEditor = useTagEditor();
 
+  const createPost = async () => {
+    const postPayload = {
+      title: title.trim(),
+      content: markdown,
+      tags: tagEditor.tags,
+      slug: slugify(title),
+    };
+
+    const result = postSchema.safeParse(postPayload);
+
+    if (!result.success) {
+      ErrToast('모든 필드가 작성되어있지 않아요');
+      return;
+    }
+    const validatedData = result.data;
+
+    try {
+      const response = await fetch('/api/posts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(validatedData),
+      });
+
+      if (!response.ok) throw new Error('저장에 실패했습니다.');
+
+      SuccessToast('포스트가 등록되었습니다.');
+    } catch (error) {
+      console.error(error);
+      ErrToast('포스트 등록에 실패했습니다.');
+    }
+  };
+
   return (
     <div className='h-screen w-full overflow-hidden flex flex-col'>
       <div className='relative p-6 space-y-4 border-b bg-card'>
@@ -34,7 +69,9 @@ export default function WritePage() {
           handleTagKeyDown={tagEditor.handleTagKeyDown}
           removeTag={tagEditor.removeTag}
         />
-        <Button className='absolute top-4 right-4'>POST</Button>
+        <Button onClick={createPost} className='absolute top-4 right-4'>
+          POST
+        </Button>
       </div>
 
       <ResizablePanelGroup orientation='horizontal' className='flex-1'>

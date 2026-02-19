@@ -1,6 +1,6 @@
 import { useCallback, useRef } from 'react';
+import { ErrToast } from '@/components/common';
 import { uploadPostImage } from '@/lib/supabase/uploadimage';
-import { toast } from 'sonner';
 
 export const useMarkdownEditor = (
   textareaRef: React.RefObject<HTMLTextAreaElement | null>,
@@ -98,11 +98,10 @@ export const useMarkdownEditor = (
           currentOffset += insertText.length;
         } catch (error) {
           console.error('Image upload failed:', error);
-          toast(`${file.name} 업로드에 실패했습니다.`);
+          ErrToast(`${file.name} 업로드에 실패했습니다.`);
         }
       }
 
-      // 4. 최종 삽입 후 커서 위치 조정
       setTimeout(() => {
         if (textarea) {
           const finalPos = basePosition + currentOffset;
