@@ -21,3 +21,28 @@ export const slugify = (text: string): string => {
     .replace(/-+/g, '-'); // 연속된 하이픈 제거
   return slug;
 };
+
+export function formatDate(dateString: Date): string {
+  const date = new Date(dateString);
+
+  const MONTHS = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+
+  const year = date.getFullYear();
+  const month = MONTHS[date.getMonth()];
+  const day = date.getDate();
+
+  return `Posted on ${month} ${day}, ${year}`;
+}

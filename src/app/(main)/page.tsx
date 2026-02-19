@@ -1,25 +1,13 @@
-import type { Post } from '@/db/schema/post';
-import { AsciiArt } from '@/components/common';
-import { PostList } from '@/components/post-card/PostList';
+import { PostList } from '@/components/post-card';
+import { db } from '@/db';
+import { posts } from '@/db/schema/post';
+import { desc } from 'drizzle-orm';
 
-const domain = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
-
-const fetchPosts = async () => {
-  const response = await fetch(`${domain}/api/post`);
-  if (!response.ok) throw new Error('불러오기 실패');
-
-  const data: Post[] = await response.json();
-  console.log(data);
-  return data;
-};
-
-export default function Main() {
-  const response = fetchPosts();
+export default async function Main() {
+  const allPosts = await db.select().from(posts).orderBy(desc(posts.createdAt));
   return (
     <div className='max-w-7xl mx-auto'>
-      <PostList />
-      <PostList />
-      <PostList />
+      <PostList allPosts={allPosts} />
     </div>
   );
 }
