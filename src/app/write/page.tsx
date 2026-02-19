@@ -43,7 +43,7 @@ export default function WritePage() {
     const validatedData = result.data;
 
     try {
-      const response = await fetch('/api/posts', {
+      const response = await fetch('/api/write', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(validatedData),
@@ -52,6 +52,7 @@ export default function WritePage() {
       if (!response.ok) throw new Error('저장에 실패했습니다.');
 
       SuccessToast('포스트가 등록되었습니다.');
+      //TODO: REDRIECT 필요
     } catch (error) {
       console.error(error);
       ErrToast('포스트 등록에 실패했습니다.');

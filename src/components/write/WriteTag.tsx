@@ -15,7 +15,9 @@ export function WriteTag({ tagInput, tags, setTagInput, handleTagKeyDown, remove
       {tags.map((tag, index) => (
         <Badge key={index} variant='secondary' className='px-3 py-1 text-sm gap-1 flex items-center'>
           {tag}
-          <X className='w-3 h-3 cursor-pointer hover:text-destructive' onClick={() => removeTag(index)} />
+          <button type='button' onClick={() => removeTag(index)} className='hover:text-destructive'>
+            <X className='w-3 h-3 cursor-pointer' />
+          </button>
         </Badge>
       ))}
       <input
