@@ -1,4 +1,5 @@
 import { useCallback, useRef } from 'react';
+import { uploadPostImageAction } from '@/actions/upload';
 import { ErrToast } from '@/components/common';
 import { uploadPostImage } from '@/lib/supabase/uploadimage';
 
@@ -77,28 +78,28 @@ export const useMarkdownEditor = (
       const basePosition = dragPositionRef.current;
       let currentOffset = 0;
 
-      // 여러 파일을 순차적으로 업로드합니다.
+      // handleDrop 루프 내부 수정
       for (const file of files) {
         try {
-          // 1. Supabase 업로드 실행
-          const publicUrl = await uploadPostImage(file);
+          const formData = new FormData();
+          formData.append('file', file);
 
-          // 2. 마크다운 문구 생성
+          // 서버 액션 호출 (여기서 sharp 압축이 실행됨)
+          const { publicUrl } = await uploadPostImageAction(formData);
+
           const filename = file.name.replace(/\.[^.]+$/, '');
           const insertText = `\n![${filename}|300](${publicUrl})\n`;
 
-          // 3. 텍스트 삽입 (함수형 업데이트로 순차 처리 보장)
           setMarkdown((prev) => {
             const before = prev.slice(0, basePosition + currentOffset);
             const after = prev.slice(basePosition + currentOffset);
             return before + insertText + after;
           });
 
-          // 다음 이미지가 들어갈 위치를 계산합니다.
           currentOffset += insertText.length;
         } catch (error) {
-          console.error('Image upload failed:', error);
-          ErrToast(`${file.name} 업로드에 실패했습니다.`);
+          console.error('Upload failed:', error);
+          ErrToast('Failed to upload image');
         }
       }
 
