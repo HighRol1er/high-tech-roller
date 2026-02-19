@@ -1,7 +1,7 @@
 import { useCallback, useRef } from 'react';
 import { uploadPostImageAction } from '@/actions/upload';
 import { ErrToast } from '@/components/common';
-import { uploadPostImage } from '@/lib/supabase/uploadimage';
+import imageCompression from 'browser-image-compression';
 
 export const useMarkdownEditor = (
   textareaRef: React.RefObject<HTMLTextAreaElement | null>,
@@ -81,8 +81,15 @@ export const useMarkdownEditor = (
       // handleDrop 루프 내부 수정
       for (const file of files) {
         try {
+          const compressed = await imageCompression(file, {
+            maxWidthOrHeight: 1200,
+            fileType: 'image/webp',
+            initialQuality: 0.75,
+            useWebWorker: true,
+          });
+
           const formData = new FormData();
-          formData.append('file', file);
+          formData.append('file', compressed);
 
           // 서버 액션 호출 (여기서 sharp 압축이 실행됨)
           const { publicUrl } = await uploadPostImageAction(formData);
