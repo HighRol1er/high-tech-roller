@@ -13,10 +13,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
+import { slugify } from '@/lib';
 import { NAV } from '@/shared/constants';
 
 interface AppSidebarProps {
-  // 태그 이름과 해당 태그가 포함된 포스트 개수를 함께 받는 것이 좋습니다.
   tagCounts: Record<string, number>;
 }
 
@@ -53,12 +53,10 @@ export function AppSidebar({ tagCounts }: AppSidebarProps) {
 
         <Separator />
 
-        {/* 섹션 2: 태그 네비게이션 (독립된 Group으로 분리) */}
         <SidebarGroup className='group-data-[collapsible=icon]:hidden'>
           <SidebarGroupLabel className='font-figtree'>Post Tags</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {/* 전체 보기 */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link href='/' className='flex items-center justify-between w-full'>
@@ -70,13 +68,12 @@ export function AppSidebar({ tagCounts }: AppSidebarProps) {
                 </SidebarMenuButton>
               </SidebarMenuItem>
 
-              {/* 개별 태그 목록 */}
               {tags.map((tag) => (
                 <SidebarMenuItem key={tag}>
                   <SidebarMenuButton asChild>
-                    <Link href={`/?tag=${tag}`} className='flex items-center justify-between w-full'>
+                    <Link href={`/?tag=${slugify(tag)}`} className='flex items-center justify-between w-full'>
                       <span className='truncate'># {tag}</span>
-                      <span className='text-[10px] text-muted-foreground ml-2 font-mono'>({tagCounts[tag]})</span>
+                      <span className='text-sm text-muted-foreground ml-2'>({tagCounts[tag]})</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
