@@ -21,13 +21,14 @@ export const PostCard = ({ post }: PostCardProps) => {
         <CardHeader className='p-2 pb-0'>
           <Title title={post.title} />
         </CardHeader>
-
         <CardContent className='space-y-2 p-2 pt-0'>
           <DateStat date={formatDate(post.createdAt)} />
           <Separator />
-          <div className='flex flex-wrap gap-2'>
+          <div className='flex items-center gap-2 overflow-hidden whitespace-nowrap'>
             {post.tags.map((tag: string, i: number) => (
-              <Tags key={i}>{tag}</Tags>
+              <Tags key={i} className='shrink-0'>
+                {tag}
+              </Tags>
             ))}
           </div>
         </CardContent>
