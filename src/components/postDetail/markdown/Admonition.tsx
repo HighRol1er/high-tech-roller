@@ -51,6 +51,11 @@ const typeConfig: Record<
 
 export const Admonition = ({ type, children }: AdmonitionProps) => {
   const config = typeConfig[type];
+
+  if (!config) {
+    return <>{children}</>;
+  }
+
   const Icon = config.icon;
 
   return (

@@ -1,4 +1,6 @@
-import type { Heading } from '@/shared/lib/markdown-utils';
+'use client';
+
+import type { Heading } from '@/lib';
 import { useEffect } from 'react';
 import { Separator } from '@/components/ui/separator';
 
@@ -23,6 +25,7 @@ export const Agenda = ({ headings }: AgendaProps) => {
     });
   }, [headings]);
 
+  // };
   const handleClick = (id: string) => {
     const element = document.getElementById(id);
     if (element) {

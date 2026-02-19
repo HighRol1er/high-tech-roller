@@ -1,1 +1,3 @@
-export * from "./PostStats";
+// export * from './PostStats';
+export * from './PostDetail';
+export * from './Agenda';
