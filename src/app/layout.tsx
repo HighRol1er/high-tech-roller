@@ -40,7 +40,7 @@ export default async function RootLayout({
   return (
     <html lang='en' className={`${domine.variable} ${lora.variable}`} suppressHydrationWarning>
       <body className={`antialiased`}>
-        <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute='class' defaultTheme='dark' enableSystem disableTransitionOnChange>
           <SidebarProvider>
             <AppSidebar tagCounts={tagCounts} />
             <SidebarInset>
