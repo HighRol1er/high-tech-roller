@@ -5,6 +5,10 @@ import { posts } from '@/db/schema/post';
 import { postSchema } from '@/types';
 
 export async function POST(req: NextRequest) {
+  if (process.env.NODE_ENV === 'production') {
+    return;
+  }
+
   try {
     const body = await req.json();
     const result = postSchema.safeParse(body);
