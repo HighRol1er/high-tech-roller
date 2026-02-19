@@ -17,9 +17,6 @@ export function Thumbnail({ tags }: ThumbnailProps) {
   if (!tags || tags.length === 0) {
     return TAG_MAP['default'];
   }
-
   const key = tags[0].toLowerCase().trim().replace(/\s+/g, '');
-  console.log(key);
-
   return TAG_MAP[key] ?? TAG_MAP['default'];
 }
