@@ -1,5 +1,6 @@
 'use client';
 
+import { Title } from './Title';
 import { motion } from 'framer-motion';
 
 const nodes = [
@@ -22,7 +23,7 @@ const edges = [
 export function Web() {
   return (
     <motion.div
-      className='relative w-full h-full bg-zinc-100 dark:bg-zinc-950 select-none cursor-pointer'
+      className='relative w-full h-full bg-zinc-800 select-none cursor-pointer'
       initial='rest'
       whileHover='hover'
     >
@@ -50,10 +51,11 @@ export function Web() {
       />
 
       {/* Web 타이틀 — 항상 보임 */}
-      <div className='absolute top-3 left-4 z-20 flex flex-col leading-none'>
+      {/* <div className='absolute top-3 left-4 z-20 flex flex-col leading-none'>
         <span className='text-4xl font-black tracking-tighter text-black/90 dark:text-white/90 font-mono'>Web</span>
         <div className='h-0.5 bg-green-400 mt-1 rounded-full' />
-      </div>
+      </div> */}
+      <Title title='Web' />
 
       {/* 네트워크 그래프 */}
       <svg className='absolute inset-0 w-full h-full'>

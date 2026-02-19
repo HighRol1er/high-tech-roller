@@ -1,5 +1,6 @@
 'use client';
 
+import { Title } from './Title';
 import { motion } from 'framer-motion';
 
 const cx = 50;
@@ -49,10 +50,7 @@ export function ReactIllustration() {
       ))}
 
       {/* 타이틀 — 항상 보임 */}
-      <div className='absolute top-3 left-4 z-20 flex flex-col leading-none'>
-        <span className='text-4xl font-black tracking-tighter text-white/90 font-mono'>React</span>
-        <div className='h-0.5 bg-[#61dafb] mt-1 rounded-full' />
-      </div>
+      <Title title={'React'} titleStyle={'text-[#61dafb]'} />
 
       {/* hover 시 글로우 */}
       <motion.div

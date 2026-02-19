@@ -119,7 +119,7 @@ const CREATIONAL_BLOCKS = [0, 1, 2, 3, 4].map((i) => ({
   floatDelay: i * 0.1 + 0.4,
 }));
 
-export function GoFIllustration() {
+export function DesignPatternPic() {
   return (
     <motion.div
       className='relative w-full h-full overflow-hidden select-none cursor-pointer'
@@ -152,7 +152,6 @@ export function GoFIllustration() {
 
       {/* 타이틀 */}
       <div className='absolute top-3 left-4 z-20 flex flex-col leading-none'>
-        <span className='text-[11px] font-mono tracking-[0.4em] text-white/30'>GANG OF FOUR</span>
         <span
           className='text-4xl font-black tracking-tighter text-white leading-none'
           style={{ fontFamily: 'Georgia, serif' }}
@@ -170,10 +169,6 @@ export function GoFIllustration() {
         >
           Patterns
         </span>
-        <div
-          className='h-px mt-2'
-          style={{ background: 'linear-gradient(90deg, #fb923c44, #38bdf844, #c084fc44)', width: '140%' }}
-        />
       </div>
 
       {/* 아이소메트릭 SVG */}
