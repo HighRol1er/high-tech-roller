@@ -47,6 +47,10 @@
   --radius-4xl: calc(var(--radius) + 16px);
   --font-domine: var(--font-domine);
   --font-lora: var(--font-lora), 'Times New Roman', serif;
+  --font-lora: var(--font-lora), 'Times New Roman', serif;
+  --font-mono:
+    var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+    monospace;
 }
 
 @utility font-eva-title {

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { domine, lora } from './fonts';
+import { domine, jetbrainsmono, lora } from './fonts';
 import '../shared/styles/globals.css';
 import { AppSidebar } from '@/components/layouts';
 import { Header } from '@/components/layouts/Header';
@@ -8,16 +8,6 @@ import { Toaster } from '@/components/ui/sonner';
 import { db } from '@/db';
 import { posts } from '@/db/schema/post';
 import { ThemeProvider } from '@/providers';
-
-// const geistSans = Geist({
-//   variable: '--font-geist-sans',
-//   subsets: ['latin'],
-// });
-
-// const geistMono = Geist_Mono({
-//   variable: '--font-geist-mono',
-//   subsets: ['latin'],
-// });
 
 export const metadata: Metadata = {
   title: 'HighTechRoller',
@@ -38,7 +28,11 @@ export default async function RootLayout({
   });
 
   return (
-    <html lang='en' className={`${domine.variable} ${lora.variable}`} suppressHydrationWarning>
+    <html
+      lang='en'
+      className={`${domine.variable} ${lora.variable} ${jetbrainsmono.variable}`}
+      suppressHydrationWarning
+    >
       <body className={`antialiased`}>
         <ThemeProvider attribute='class' defaultTheme='dark' enableSystem disableTransitionOnChange>
           <SidebarProvider>

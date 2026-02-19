@@ -1,4 +1,4 @@
-import { Domine, Lora } from 'next/font/google';
+import { Domine, JetBrains_Mono, Lora } from 'next/font/google';
 
 export const domine = Domine({
   subsets: ['latin'],
@@ -9,5 +9,12 @@ export const domine = Domine({
 export const lora = Lora({
   subsets: ['latin'],
   variable: '--font-lora',
+  display: 'swap',
+});
+
+export const jetbrainsmono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['700', '600'],
+  variable: '--font-jetbrains-mono',
   display: 'swap',
 });
