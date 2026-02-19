@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Tags } from '../post-card';
 import { Badge } from '../ui/badge';
 import { Logo, DarkMode } from '@/components/common';
 import { Separator } from '@/components/ui/separator';
@@ -45,7 +44,7 @@ export function AppSidebar({ tagCounts }: AppSidebarProps) {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
-              <div className='px-2 py-2'>
+              <div>
                 <DarkMode />
               </div>
             </SidebarMenu>
