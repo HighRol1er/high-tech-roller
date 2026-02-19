@@ -21,19 +21,8 @@ const extractText = (node: ReactNode): string => {
 };
 
 export const Blockquote = ({ children, className, ...props }: ComponentPropsWithoutRef<'blockquote'>) => {
-  // 전체 자식들로부터 텍스트만 합쳐서 가져옵니다.
   const allText = extractText(children);
-
-  // 콘솔로 확인해보면 이제 [!type]이 잘 보일 거예요!
-  console.log('Extracted Text:', allText);
-
   const match = /\[!(\w+)\]/.exec(allText);
-
-  // if (match) {
-  //   const type = match[1].toLowerCase() as any;
-  //   const cleanedText = allText.replace(/\[!\w+\]/g, "").trim();
-  //   return <Admonition type={type}>{cleanedText}</Admonition>;
-  // }
 
   if (match) {
     const type = match[1].toLowerCase() as AdmonitionType;
