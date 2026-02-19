@@ -46,3 +46,27 @@ export function formatDate(dateString: Date): string {
 
   return `Posted on ${month} ${day}, ${year}`;
 }
+
+export interface Heading {
+  level: number;
+  text: string;
+  id: string;
+}
+
+export const extractHeadings = (markdown: string): Heading[] => {
+  const lines = markdown.split('\n');
+  const headings: Heading[] = [];
+
+  for (const line of lines) {
+    const match = line.match(/^(#{1,6})\s+(.+)$/);
+    if (match) {
+      const level = match[1].length;
+      const text = match[2].trim();
+      const id = slugify(text);
+
+      headings.push({ level, text, id });
+    }
+  }
+
+  return headings;
+};
