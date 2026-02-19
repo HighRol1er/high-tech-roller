@@ -4,10 +4,7 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  webpack: (config) => {
-    config.externals = [...(config.externals || []), 'sharp'];
-    return config;
-  },
+  turbopack: {}, // webpack 에러 억제
 };
 
 export default nextConfig;
