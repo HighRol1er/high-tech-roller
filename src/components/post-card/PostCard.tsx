@@ -22,7 +22,7 @@ export const PostCard = ({ post }: PostCardProps) => {
           <Title title={post.title} />
         </CardHeader>
         <CardContent className='space-y-2 p-2 pt-0'>
-          <DateStat date={formatDate(post.createdAt)} />
+          <DateStat date={formatDate(post.created_at)} />
           <Separator />
           <div className='flex items-center gap-2 overflow-hidden whitespace-nowrap'>
             {post.tags.map((tag: string, i: number) => (

@@ -1,17 +1,14 @@
+import type { Post } from '@/db/schema/post';
 import { notFound } from 'next/navigation';
 import { PostDetail } from '@/components/postDetail';
-import { createClient } from '@/lib/supabase/server';
-// import { db } from '@/db';
-// import { posts } from '@/db/schema/post';
-// import { eq } from 'drizzle-orm';
+import { supabase } from '@/lib/supabase';
 
-const getPost = async (decodedSlug: string) => {
+const getPost = async (decodedSlug: string): Promise<Post> => {
   try {
-    const supabase = await createClient();
     const { data, error } = await supabase.from('posts').select('*').eq('slug', decodedSlug).single();
 
     if (error) throw error;
-    return data;
+    return data as Post;
   } catch (error) {
     console.error('Database Fetch Error:', error);
     throw new Error('데이터베이스에서 포스트를 가져오는 데 실패했습니다.');

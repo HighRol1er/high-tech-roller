@@ -7,8 +7,8 @@ export const posts = pgTable('posts', {
   tags: text('tags').array().notNull().default([]),
   slug: varchar('slug', { length: 255 }).unique().notNull(), // URL 주소로 쓰일 이름
   content: text('content').notNull(),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+  created_at: timestamp('created_at').defaultNow().notNull(),
+  updated_at: timestamp('updated_at').defaultNow().notNull(),
 });
 
 export type Post = InferSelectModel<typeof posts>;

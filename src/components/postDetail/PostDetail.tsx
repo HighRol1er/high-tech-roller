@@ -19,7 +19,6 @@ interface PostDetailProps {
 }
 
 export function PostDetail({ post }: PostDetailProps) {
-  // useEffect와 useState 대신 useMemo를 사용합니다.
   const headings = useMemo(() => {
     return extractHeadings(post.content);
   }, [post.content]);
@@ -31,7 +30,7 @@ export function PostDetail({ post }: PostDetailProps) {
         <header className='space-y-4 mb-8'>
           <h1 className='text-4xl font-bold tracking-tight'>{post.title}</h1>
           <div className='flex items-center gap-2 text-muted-foreground'>
-            <span className='text-sm text-muted-foreground font-lora'>{formatDate(post.createdAt)}</span>
+            <span className='text-sm text-muted-foreground font-lora'>{formatDate(post.created_at)}</span>
           </div>
           <div className='flex flex-wrap gap-2'>
             {post.tags.map((tag, i) => (

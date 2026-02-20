@@ -5,9 +5,7 @@ import { AppSidebar } from '@/components/layouts';
 import { Header } from '@/components/layouts/Header';
 import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
 import { Toaster } from '@/components/ui/sonner';
-// import { db } from '@/db';
-// import { posts } from '@/db/schema/post';
-import { createClient } from '@/lib/supabase/server';
+import { supabase } from '@/lib/supabase';
 import { ThemeProvider } from '@/providers';
 
 export const metadata: Metadata = {
@@ -20,7 +18,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const supabase = await createClient();
   const { data: allPosts } = await supabase.from('posts').select('tags');
 
   const tagCounts: Record<string, number> = {};
