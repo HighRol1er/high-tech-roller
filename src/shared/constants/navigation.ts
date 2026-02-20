@@ -15,6 +15,7 @@ export const NAV = [
     title: '사과게임',
     url: 'https://www.gamesaien.com/game/fruit_box_a/',
     icon: Apple,
+    isExternal: true,
   },
   {
     title: 'Playlist',

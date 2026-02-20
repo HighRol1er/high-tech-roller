@@ -37,7 +37,11 @@ export function AppSidebar({ tagCounts }: AppSidebarProps) {
               {NAV.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild tooltip={item.title}>
-                    <Link href={item.url} target='_blank' rel='noopener noreferrer'>
+                    <Link
+                      href={item.url}
+                      target={item.isExternal ? '_blank' : '_self'}
+                      rel={item.isExternal ? 'noopener noreferrer' : undefined}
+                    >
                       <item.icon />
                       <span>{item.title}</span>
                     </Link>
