@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useRouter } from 'next/navigation'; // redirect 대신 useRouter
+import { useRouter } from 'next/navigation';
 import { ErrToast, SuccessToast } from '@/components/common';
 
 export function useGetout() {
