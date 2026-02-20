@@ -4,7 +4,7 @@ import type { Post } from '@/db/schema/post';
 import { useMemo } from 'react';
 import { Tags } from '@/components/post-card';
 import { Agenda } from '@/components/postDetail';
-import { ComponentConfig } from '@/components/postDetail/markdown';
+import { ComponentConfig } from '@/components/markdown';
 import { Separator } from '@/components/ui/separator';
 import { extractHeadings, formatDate } from '@/lib';
 import 'katex/dist/katex.min.css';

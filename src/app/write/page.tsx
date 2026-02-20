@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react';
 import { ErrToast, SuccessToast } from '@/components/common';
-import { ComponentConfig } from '@/components/postDetail/markdown';
+import { ComponentConfig } from '@/components/markdown';
 import { Button } from '@/components/ui/button';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable';
 import { WriteTag, WriteTitle } from '@/components/write';
