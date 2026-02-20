@@ -20,7 +20,7 @@ const edges = [
   [0, 4],
 ];
 
-export function Web() {
+export function WebPic() {
   return (
     <motion.div
       className='relative w-full h-full bg-zinc-800 select-none cursor-pointer'

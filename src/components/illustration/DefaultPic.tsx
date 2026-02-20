@@ -3,7 +3,7 @@
 import { Title } from './Title';
 import { motion } from 'framer-motion';
 
-export function Defaultill() {
+export function DefaultPic() {
   return (
     <motion.div
       className='relative w-full h-full select-none cursor-pointer overflow-hidden flex items-center justify-center'

@@ -21,7 +21,7 @@ const ORBITS = [
   { id: 'orbit-2', rx: 42, ry: 14, rotate: 120, duration: 2.9 },
 ];
 
-export function ReactIllustration() {
+export function ReactPic() {
   return (
     <motion.div
       className='relative w-full h-full bg-[#0a0f1e] select-none overflow-hidden cursor-pointer'

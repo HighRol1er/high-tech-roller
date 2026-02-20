@@ -1,12 +1,12 @@
-import { Web, ReactIllustration, DesignPatternPic, JsPic, TsPic, Defaultill } from '@/components/illustration';
+import { WebPic, ReactPic, DesignPatternPic, JsPic, TsPic, DefaultPic } from '@/components/illustration';
 
 const TAG_MAP: Record<string, React.ReactNode> = {
-  web: <Web />,
-  react: <ReactIllustration />,
+  web: <WebPic />,
+  react: <ReactPic />,
   designpattern: <DesignPatternPic />,
   javascript: <JsPic />,
   typescript: <TsPic />,
-  default: <Defaultill />,
+  default: <DefaultPic />,
 };
 
 interface ThumbnailProps {
