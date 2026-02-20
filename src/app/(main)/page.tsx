@@ -21,7 +21,6 @@ const getAllPosts = async () => {
 
 export default async function Main() {
   const allPosts = await getAllPosts();
-  console.log(allPosts);
 
   return (
     <div className='max-w-7xl mx-auto'>
