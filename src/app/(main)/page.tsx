@@ -1,5 +1,7 @@
+import { Loader } from '@/components/common';
 import { PostList } from '@/components/post-card';
 import { supabase } from '@/lib/supabase';
+import { Suspense } from 'react';
 
 const getAllPosts = async () => {
   try {
@@ -23,7 +25,9 @@ export default async function Main() {
 
   return (
     <div className='max-w-7xl mx-auto'>
-      <PostList allPosts={allPosts} />
+      <Suspense fallback={<Loader />}>
+        <PostList allPosts={allPosts} />
+      </Suspense>
     </div>
   );
 }

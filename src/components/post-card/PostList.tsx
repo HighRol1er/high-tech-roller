@@ -2,9 +2,9 @@
 
 import type { PostSummary } from '@/types';
 
-import { useSearchParams } from 'next/navigation';
 import { PostCard } from '@/components/post-card/PostCard';
 import { slugify } from '@/lib';
+import { useSearchParams } from 'next/navigation';
 
 export const PostList = ({ allPosts }: { allPosts: PostSummary[] }) => {
   const searchParams = useSearchParams();
