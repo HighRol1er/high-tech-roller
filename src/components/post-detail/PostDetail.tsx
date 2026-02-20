@@ -3,7 +3,7 @@
 import type { Post } from '@/db/schema/post';
 import { useMemo } from 'react';
 import { Tags } from '@/components/post-card';
-import { Agenda } from '@/components/postDetail';
+import { Agenda } from '@/components/post-detail';
 import { ComponentConfig } from '@/components/markdown';
 import { Separator } from '@/components/ui/separator';
 import { extractHeadings, formatDate } from '@/lib';

@@ -1,9 +1,9 @@
 import type { Post } from '@/db/schema/post';
 import { notFound } from 'next/navigation';
-import { PostDetail } from '@/components/postDetail';
+import { PostDetail } from '@/components/post-detail';
 import { supabase } from '@/lib/supabase';
 
-const getPost = async (decodedSlug: string): Promise<Post> => {
+const getPost = async (decodedSlug: string): Promise<Post | null> => {
   try {
     const { data, error } = await supabase.from('posts').select('*').eq('slug', decodedSlug).single();
 
@@ -11,7 +11,7 @@ const getPost = async (decodedSlug: string): Promise<Post> => {
     return data as Post;
   } catch (error) {
     console.error('Database Fetch Error:', error);
-    throw new Error('데이터베이스에서 포스트를 가져오는 데 실패했습니다.');
+    return null;
   }
 };
 interface Slug {
