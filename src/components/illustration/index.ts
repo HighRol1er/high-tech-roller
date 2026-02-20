@@ -4,3 +4,4 @@ export * from './DesignPatternPic';
 export * from './JsPic';
 export * from './TsPic';
 export * from './DefaultPic';
+export * from './TestPic';
