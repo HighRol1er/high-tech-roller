@@ -1,15 +1,12 @@
 'use client';
 
-import type { Post } from '@/db/schema/post';
+import type { PostSummary } from '@/types';
+
 import { useSearchParams } from 'next/navigation';
 import { PostCard } from '@/components/post-card/PostCard';
 import { slugify } from '@/lib';
 
-interface PostListProps {
-  allPosts: Post[];
-}
-
-export const PostList = ({ allPosts }: PostListProps) => {
+export const PostList = ({ allPosts }: { allPosts: PostSummary[] }) => {
   const searchParams = useSearchParams();
   const tagParam = searchParams.get('tag');
 

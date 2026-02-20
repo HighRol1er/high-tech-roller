@@ -1,4 +1,4 @@
-import type { Post } from '@/db/schema/post';
+import type { PostSummary } from '@/types';
 
 import Link from 'next/link';
 import { Tags, Title, Thumbnail, DateStat } from '@/components/post-card';
@@ -6,11 +6,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { formatDate } from '@/lib';
 
-interface PostCardProps {
-  post: Post;
-}
-
-export const PostCard = ({ post }: PostCardProps) => {
+export const PostCard = ({ post }: { post: PostSummary }) => {
   return (
     <Link href={`post/${post.slug}`}>
       <Card className='w-full p-0 gap-0 group cursor-pointer h-75 sm:h-auto border-2 overflow-hidden'>

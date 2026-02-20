@@ -1,3 +1,4 @@
+import { Post } from '@/db/schema/post';
 import { z } from 'zod';
 
 export const postSchema = z.object({
@@ -8,3 +9,5 @@ export const postSchema = z.object({
 });
 
 export type NewPost = z.infer<typeof postSchema>;
+
+export type PostSummary = Omit<Post, 'content' | 'updated_at'>;
