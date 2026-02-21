@@ -1,9 +1,8 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  // outputFileTracingExcludes: {
-  //   '/write': ['katex', 'rehype-katex', 'remark-math'],
-  // },
+  serverExternalPackages: ['@vercel/og', 'resvg'],
+  bundlePagesRouterDependencies: false,
 };
 
 export default nextConfig;

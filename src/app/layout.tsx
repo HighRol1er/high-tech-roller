@@ -10,6 +10,9 @@ import { ThemeProvider } from '@/providers';
 export const metadata: Metadata = {
   title: 'HighTechRoller',
   description: 'クノロジーブログ',
+  icons: {
+    icon: '/favicon.svg', // public 폴더를 가리킴
+  },
 };
 
 export default async function RootLayout({
