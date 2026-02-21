@@ -3,8 +3,27 @@ import type { ComponentPropsWithoutRef } from 'react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Copy, Check, FileCode } from 'lucide-react';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import PrismLight from 'react-syntax-highlighter/dist/esm/prism-light';
+import typescript from 'react-syntax-highlighter/dist/esm/languages/prism/typescript';
+import javascript from 'react-syntax-highlighter/dist/esm/languages/prism/javascript';
+import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
+import tsx from 'react-syntax-highlighter/dist/esm/languages/prism/tsx';
+import bash from 'react-syntax-highlighter/dist/esm/languages/prism/bash';
+import python from 'react-syntax-highlighter/dist/esm/languages/prism/python';
+import css from 'react-syntax-highlighter/dist/esm/languages/prism/css';
+import json from 'react-syntax-highlighter/dist/esm/languages/prism/json';
+import sql from 'react-syntax-highlighter/dist/esm/languages/prism/sql';
+
+PrismLight.registerLanguage('typescript', typescript);
+PrismLight.registerLanguage('javascript', javascript);
+PrismLight.registerLanguage('jsx', jsx);
+PrismLight.registerLanguage('tsx', tsx);
+PrismLight.registerLanguage('bash', bash);
+PrismLight.registerLanguage('python', python);
+PrismLight.registerLanguage('css', css);
+PrismLight.registerLanguage('json', json);
+PrismLight.registerLanguage('sql', sql);
 
 export const Code = ({ children, className }: ComponentPropsWithoutRef<'code'>) => {
   const [copied, setCopied] = useState(false);
@@ -94,7 +113,7 @@ export const Code = ({ children, className }: ComponentPropsWithoutRef<'code'>) 
         </Button>
       )}
 
-      <SyntaxHighlighter
+      <PrismLight
         language={language}
         style={myCustomTheme}
         PreTag='div'
@@ -119,7 +138,7 @@ export const Code = ({ children, className }: ComponentPropsWithoutRef<'code'>) 
         }}
       >
         {codeString}
-      </SyntaxHighlighter>
+      </PrismLight>
     </div>
   );
 };
