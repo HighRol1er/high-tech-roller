@@ -9,9 +9,9 @@ import { ThemeProvider } from '@/providers';
 
 export const metadata: Metadata = {
   title: 'HighTechRoller',
-  description: 'クノロジーブログ',
+  description: 'テクノロジー', // 테그 블로그 라는 뜻
   icons: {
-    icon: '/favicon.svg', // public 폴더를 가리킴
+    icon: '/icon.svg',
   },
 };
 

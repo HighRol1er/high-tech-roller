@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import { db } from '@/db';
 import { posts } from '@/db/schema/post';
 import { postSchema } from '@/types';
-import { revalidatePath } from 'next/cache';
+// import { revalidatePath } from 'next/cache';
 
 export async function POST(req: NextRequest) {
   if (process.env.NODE_ENV === 'production') {
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
       })
       .returning();
 
-    revalidatePath('/');
+    // revalidatePath('/');
 
     return NextResponse.json({ success: true, data: newPost[0] }, { status: 201 });
   } catch (error: unknown) {

@@ -1,3 +1,6 @@
+export const dynamic = 'force-static';
+export const revalidate = false; // 빌드 타임에만 생성
+
 import { Loader } from '@/components/common';
 import { PostList } from '@/components/post-card';
 import { supabase } from '@/lib/supabase';
