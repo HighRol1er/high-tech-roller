@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import { domine, jetbrainsmono, lora } from './fonts';
 import '../shared/styles/globals.css';
-import { AppSidebar } from '@/components/layouts';
-import { Header } from '@/components/layouts/Header';
+import { AppSidebar, Header } from '@/components/layouts';
 import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
 import { Toaster } from '@/components/ui/sonner';
 import { supabase } from '@/lib/supabase';

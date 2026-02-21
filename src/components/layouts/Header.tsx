@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import { SidebarTrigger } from '@/components/ui/sidebar';
+import { Me } from '@/components/layouts';
 
 export function Header() {
   const pathname = usePathname();
@@ -19,9 +20,14 @@ export function Header() {
   }
 
   return (
-    <header className='flex w-full items-center h-16 pl-2 sticky top-0 bg-background/50 backdrop-blur-sm z-10'>
-      <SidebarTrigger />
-      <h1 className='text-lg font-semibold truncate pr-4'>{displayTitle}</h1>
+    <header className='flex w-full items-center justify-between h-16 pl-2 sticky top-0 bg-background/50 backdrop-blur-sm z-10'>
+      <div className='flex'>
+        <SidebarTrigger />
+        <h1 className='text-lg font-semibold truncate pr-4'>{displayTitle}</h1>
+      </div>
+      <div className='pr-2 sm:pr-4 md:pr-6 lg:pr-10'>
+        <Me />
+      </div>
     </header>
   );
 }

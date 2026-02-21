@@ -12,6 +12,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarFooter,
 } from '@/components/ui/sidebar';
 import { slugify } from '@/lib';
 import { NAV } from '@/shared/constants';
