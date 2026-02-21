@@ -23,6 +23,7 @@ const getAllPosts = async () => {
 };
 
 export default async function Main() {
+  console.log('RENDERED AT:', new Date().toISOString());
   const allPosts = await getAllPosts();
 
   return (
