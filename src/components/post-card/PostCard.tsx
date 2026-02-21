@@ -1,15 +1,27 @@
+'use client';
+
 import type { PostSummary } from '@/types';
 
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 import { Tags, Title, Thumbnail, DateStat } from '@/components/post-card';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { formatDate } from '@/lib';
+import { useDesktop } from '@/hooks';
 
 export const PostCard = ({ post }: { post: PostSummary }) => {
+  const router = useRouter();
+  const { isDesktop } = useDesktop();
+
   return (
-    <Link href={`post/${post.slug}`}>
-      <Card className='w-full p-0 gap-0 group cursor-pointer h-75 sm:h-auto border-2 overflow-hidden'>
+    <motion.div
+      layoutId={isDesktop ? `card-${post.slug}` : undefined}
+      onClick={() => router.push(`post/${post.slug}`)}
+      transition={{ duration: 0.3, ease: 'easeInOut' }}
+      className='cursor-pointer'
+    >
+      <Card className='w-full p-0 gap-0 group h-75 sm:h-auto border-2 overflow-hidden'>
         <div className='relative w-full aspect-video overflow-hidden rounded-t-md bg-muted'>
           <Thumbnail tags={post.tags} />
         </div>
@@ -29,6 +41,6 @@ export const PostCard = ({ post }: { post: PostSummary }) => {
           </div>
         </CardContent>
       </Card>
-    </Link>
+    </motion.div>
   );
 };

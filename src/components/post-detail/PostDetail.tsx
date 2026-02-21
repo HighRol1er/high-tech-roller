@@ -2,6 +2,7 @@
 
 import type { Post } from '@/db/schema/post';
 import { useMemo } from 'react';
+import { motion } from 'framer-motion';
 import { Tags } from '@/components/post-card';
 import { Agenda } from '@/components/post-detail';
 import { ComponentConfig } from '@/components/markdown';
@@ -13,19 +14,25 @@ import rehypeKatex from 'rehype-katex';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
+import { useDesktop } from '@/hooks';
 
 interface PostDetailProps {
   post: Post;
 }
 
 export function PostDetail({ post }: PostDetailProps) {
+  const { isDesktop } = useDesktop();
+
   const headings = useMemo(() => {
     return extractHeadings(post.content);
   }, [post.content]);
 
   return (
-    <article className='max-w-7xl mx-auto py-10 px-4 flex'>
-      {/* 헤더 영역 */}
+    <motion.article
+      layoutId={isDesktop ? `card-${post.slug}` : undefined}
+      className='max-w-7xl mx-auto py-10 px-4 flex'
+      transition={{ duration: 0.3, ease: 'easeInOut' }}
+    >
       <div className='flex-1'>
         <header className='space-y-4 mb-8'>
           <h1 className='text-4xl font-bold tracking-tight'>{post.title}</h1>
@@ -41,7 +48,6 @@ export function PostDetail({ post }: PostDetailProps) {
 
         <Separator className='my-8' />
 
-        {/* 본문 마크다운 렌더링 영역 */}
         <div className='prose prose-slate dark:prose-invert max-w-none'>
           <ReactMarkdown
             remarkPlugins={[remarkGfm, remarkMath]}
@@ -55,6 +61,6 @@ export function PostDetail({ post }: PostDetailProps) {
       <aside className='hidden lg:block w-64 shrink-0'>
         <Agenda headings={headings} />
       </aside>
-    </article>
+    </motion.article>
   );
 }
