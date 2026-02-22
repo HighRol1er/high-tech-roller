@@ -41,14 +41,19 @@ const getAllPosts = async () => {
   return res.json();
 };
 
-export default async function Main() {
-  console.log('RENDERED AT:', new Date().toISOString());
+async function PostListContainer() {
   const allPosts = await getAllPosts();
+  return <PostList allPosts={allPosts} />;
+}
+
+export default function Main() {
+  console.log('RENDERED AT:', new Date().toISOString());
+  // const allPosts = await getAllPosts();
 
   return (
     <div className='max-w-7xl mx-auto'>
       <Suspense fallback={<Loader />}>
-        <PostList allPosts={allPosts} />
+        <PostListContainer />
       </Suspense>
     </div>
   );
