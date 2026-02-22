@@ -135,7 +135,7 @@ export default function Page() {
       <li>Love is a bad word</li>
       <li>Oasis - Masterplan</li>
       <li>Fade Out Lines (The Avener Rework) - The Avener (2015)</li>
-      <li></li>
+      <li>Joe Hisaishi - Summer</li>
       <li></li>
       <li></li>
       <li></li>

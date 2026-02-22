@@ -19,11 +19,11 @@ import { NAV } from '@/shared/constants';
 
 interface AppSidebarProps {
   tagCounts: Record<string, number>;
+  totalPost: number;
 }
 
-export function AppSidebar({ tagCounts }: AppSidebarProps) {
+export function AppSidebar({ tagCounts, totalPost }: AppSidebarProps) {
   const tags = Object.keys(tagCounts).sort();
-  const totalPosts = Object.values(tagCounts).reduce((a, b) => a + b, 0);
 
   return (
     <Sidebar collapsible='icon'>
@@ -67,7 +67,7 @@ export function AppSidebar({ tagCounts }: AppSidebarProps) {
                   <Link href='/' className='flex items-center justify-between w-full'>
                     <span>All Posts</span>
                     <Badge variant='secondary' className='bg-blue-500 text-white dark:bg-blue-950 dark:text-blue-300'>
-                      {totalPosts}
+                      {totalPost}
                     </Badge>
                   </Link>
                 </SidebarMenuButton>

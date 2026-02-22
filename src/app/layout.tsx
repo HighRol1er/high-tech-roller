@@ -9,7 +9,7 @@ import { ThemeProvider } from '@/providers';
 
 export const metadata: Metadata = {
   title: 'HighTechRoller',
-  description: 'テクノロジー', // 테그 블로그 라는 뜻
+  description: '技術ブログ', // 기술블로그 라는 뜻
   icons: {
     icon: '/icon.svg',
   },
@@ -20,14 +20,30 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { data: allPosts } = await supabase.from('posts').select('tags');
+  const getPostTags = async () => {
+    const { data: allPosts } = await supabase.from('posts').select('tags');
 
-  const tagCounts: Record<string, number> = {};
-  (allPosts ?? []).forEach((post) => {
-    (post.tags ?? []).forEach((tag: string) => {
-      tagCounts[tag] = (tagCounts[tag] || 0) + 1;
-    });
-  });
+    if (!allPosts) return { uniqueTags: [], tagCounts: {}, totalPostCount: 0 };
+
+    const totalPostCount = allPosts.length;
+
+    const tagCounts = allPosts
+      .flatMap((p) => p.tags || [])
+      .reduce(
+        (acc, tag) => {
+          acc[tag] = (acc[tag] || 0) + 1;
+          return acc;
+        },
+        {} as Record<string, number>,
+      );
+
+    return {
+      tagCounts,
+      totalPostCount,
+    };
+  };
+
+  const { tagCounts, totalPostCount } = await getPostTags();
 
   return (
     <html
@@ -38,7 +54,7 @@ export default async function RootLayout({
       <body className={`antialiased`}>
         <ThemeProvider attribute='class' defaultTheme='dark' enableSystem disableTransitionOnChange>
           <SidebarProvider>
-            <AppSidebar tagCounts={tagCounts} />
+            <AppSidebar tagCounts={tagCounts} totalPost={totalPostCount} />
             <SidebarInset>
               <Header />
               <main>{children}</main>
