@@ -3,6 +3,18 @@ import { notFound } from 'next/navigation';
 import { PostDetail } from '@/components/post-detail';
 import { supabase } from '@/lib/supabase';
 
+export async function generateStaticParams() {
+  const { data: posts, error } = await supabase.from('posts').select('slug');
+
+  if (error || !posts) {
+    console.error('fetching Error');
+    return [];
+  }
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
 const getPost = async (decodedSlug: string): Promise<Post | null> => {
   try {
     const { data, error } = await supabase.from('posts').select('*').eq('slug', decodedSlug).single();
@@ -14,6 +26,7 @@ const getPost = async (decodedSlug: string): Promise<Post | null> => {
     return null;
   }
 };
+
 interface Slug {
   params: Promise<{ slug: string }>;
 }
