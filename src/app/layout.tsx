@@ -6,6 +6,7 @@ import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
 import { Toaster } from '@/components/ui/sonner';
 import { supabase } from '@/lib/supabase';
 import { ThemeProvider } from '@/providers';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 export const metadata: Metadata = {
   title: 'HighTechRoller',
@@ -59,6 +60,7 @@ export default async function RootLayout({
               <Header />
               <main>{children}</main>
               <Toaster />
+              <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ''} />
             </SidebarInset>
           </SidebarProvider>
         </ThemeProvider>
