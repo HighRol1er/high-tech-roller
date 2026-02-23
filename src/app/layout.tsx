@@ -51,7 +51,7 @@ export default async function RootLayout({
       className={`${domine.variable} ${lora.variable} ${jetbrainsmono.variable}`}
       suppressHydrationWarning
     >
-      <body className={`antialiased`}>
+      <body className={`antialiased`} suppressHydrationWarning>
         <ThemeProvider attribute='class' defaultTheme='dark' enableSystem disableTransitionOnChange>
           <SidebarProvider>
             <AppSidebar tagCounts={tagCounts} totalPost={totalPostCount} />

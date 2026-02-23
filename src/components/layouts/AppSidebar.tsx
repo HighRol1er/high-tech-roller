@@ -49,9 +49,9 @@ export function AppSidebar({ tagCounts, totalPost }: AppSidebarProps) {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
-              <div>
+              <SidebarMenuItem>
                 <DarkMode />
-              </div>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
